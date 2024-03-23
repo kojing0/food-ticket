@@ -1,95 +1,76 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 export default function Home() {
+  // ログインしたユーザ名を保存
+  const [currentAccount, setCurrentAccount] = useState("");
+
+  // ウォレットに接続しているか確認
+  const checkIfWalletIsConnected = async () => {
+    try {
+      // window.ethereumにアクセスできることを確認
+      const { ethereum } = window;
+      if (!ethereum) {
+        console.log("Make sure you have Metamask!")
+      } else {
+        console.log("We have the ethereum object", ethereum)
+      }
+
+      // ユーザーのウォレットアドレスの許可を確認
+      const accounts = await ethereum.request({ method: 'eth_accounts' })
+      if (accounts.length !== 0) {
+        const account = accounts[0];
+        console.log("Found an authorized account:", account);
+        setCurrentAccount(account)
+      } else {
+        console.log("No authorized account found")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const connectWallet = async () => {
+    try {
+      // ユーザーが認証可能なウォレットアドレスを持っているか確認
+      const { ethereum } = window;
+      if (!ethereum) {
+        alert("Get MetaMask");
+        return;
+      }
+      // 持っている場合は、ユーザーに対してウォレットへのアクセス許可を求める。許可されれば、ユーザーの最初のウォレットアドレスを currentAccount に格納する。
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log("connected: ", accounts[0])
+      setCurrentAccount(accounts[0])
+      // getTweet();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => { checkIfWalletIsConnected(); }, []);
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <>
+      <Box my={4} display="flex" justifyContent="space-around">
+          サンプル中華料理店
+        {!currentAccount && (
+          <Button color="inherit" size="large" onClick={connectWallet}>
+            ウォレット接続
+          </Button>
+        )}
+        {currentAccount && (
+          <Typography >
+            ウォレット接続済み
+          </Typography>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        )}
+      </Box>
+    </>
   );
 }
