@@ -4,6 +4,7 @@ import React from "react";
 import Box from '@mui/material/Box';
 
 import Header from '../components/Header';
+import Images from '../components/Images';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Box my={4}>
         <Header title="サンプル中華料理店" />
       </Box>
+      <Images />
     </>
   );
 }
