@@ -1,0 +1,101 @@
+/* ナビゲーションバー（フッター）のスタイル */
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: repeating-linear-gradient(
+      to right,
+      #d32f2f, /* 濃い赤 */
+      #d32f2f 1cm, /* 濃い赤のストライプの幅 */
+      #ff6f60, /* 薄い赤 */
+      #ff6f60 2cm /* 次の濃い赤までの幅 */
+    );
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+  
+.footer-links {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+    align-items: center;
+}
+  
+.footer-links li {
+    margin: 0 15px;
+}
+  
+.footer-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+  
+/* ヘッダーナビゲーションのスタイル */
+.header-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+  
+.header-nav h1 {
+    text-align: center;
+}
+
+/* チェックインアイコンのスタイルを修正 */
+.check-in-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; /* アイコンの幅を30pxに増加 */
+    height: 50px; /* アイコンの高さを30pxに増加 */
+    border-radius: 50%; /* 円形 */
+    background-color: #fff; /* 白背景 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 影 */
+    padding: 6px; /* 内側のパディング */
+    margin-bottom: 0px; /* 下に少し持ち上げる */
+    z-index: 101; /* ナビゲーションバーのz-indexよりも高く設定 */
+  }
+
+/* チェックインアイコンのimgタグスタイルを修正 */
+.check-in-icon img {
+    width: 100%; /* コンテナの幅に合わせる */
+    height: auto; /* コンテナの高さに合わせる */
+  }
+
+/* フッターリンク内のSVGアイコンのサイズを調整するためのスタイルを追加 */
+.footer-links a svg {
+    width: 24px; /* アイコンの幅を24pxに設定 */
+    height: 24px; /* アイコンの高さを24pxに設定 */
+    color: white; /* SVGアイコンの色を白に設定 */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .check-in-icon {
+        width: 50px; /* モバイルでのアイコンの幅を20pxに調整 */
+        height: 50px; /* モバイルでのアイコンの高さを20pxに調整 */
+        padding: 3px; /* モバイルでの内側のパディングを3pxに調整 */
+        margin-bottom: 0px; /* 下に少し持ち上げる */
+    }
+
+    .footer-links a svg {
+        width: 20px; /* モバイルでのアイコンの幅を20pxに設定 */
+        height: 20px; /* モバイルでのアイコンの高さを20pxに設定 */
+    }
+}
+
+.footer-links a img {
+    width: 40px; /* アイコンの幅を24pxに設定 */
+    height: 40px; /* アイコンの高さを24pxに設定 */
+}
