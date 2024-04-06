@@ -1,0 +1,68 @@
+.nft-page {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+  }
+  
+  .nft-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nft-item {
+    border: 1px solid #ccc; /* 薄く線で囲む */
+    margin-bottom: 20px; /* nft-item同士の隙間を開ける */
+    border-radius: 8px; /* 角を丸くする */
+    background-color: #f9f9f9; /* 背景色を少し暗めの色に設定 */
+  }
+  
+  .nft-item h2 {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+
+  .nft-list-container {
+    overflow: auto;
+    padding-bottom: 90px; /* フッターナビゲーションの高さ + 隙間に応じて調整 */
+  }
+  
+  /* レスポンシブデザインのためのメディアクエリ */
+  @media (max-width: 600px) {
+    .nft-item {
+      padding: 10px;
+    }
+  }
+
+  @media (min-width: 601px) {
+    .nft-item h2, .nft-item p {
+      padding-left: 20px; /* 左側にパディングを追加 */
+      padding-right: 20px; /* 右側にパディングを追加 */
+    }
+  }
+
+  .nft-list-container {
+    padding-top: 60px; /* ヘッダーの高さに応じて調整 */
+    padding-bottom: 70px; /* フッターナビゲーションの高さに応じて調整 */
+    overflow-y: auto;
+    height: calc(100vh - 130px); /* ヘッダーとフッターの高さを除外したビューポートの高さ */
+  }
+
+.footer-links li a svg {
+  margin-bottom: 4px; /* アイコンとテキストの間隔 */
+  fill: white;
+}
+
+.header-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff; /* 画像に合わせて白色に設定 */
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2); /* 影を追加 */
+  z-index: 100; /* 他の要素の上に表示 */
+  padding: 0px 0px; /* スペースを適宜調整 */
+}
+
+.header-nav h1 {
+  text-align: center; /* テキストを中央揃えに */
+}
