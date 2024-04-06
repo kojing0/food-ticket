@@ -27,8 +27,7 @@ function Orders() {
   const fetchData = async () => {
     try {
       // TODO:zkyotoのコントラクトに入れ替える
-      const response = await fetch('https://zkyoto.explorer.startale.com/api/v2/tokens/0xAd2750a92F9546774FC7c961B8a762E914b49f16/instances', {
-        // const response = await fetch('https://zkyoto.explorer.startale.com/api/v2/tokens/0x81fFb522f3a1D2071A86736156E2E215D5e31ee0/instances', {
+      const response = await fetch(`https://zkyoto.explorer.startale.com/api/v2/tokens/${contractAddress}/instances`, {
         headers: {
           'accept': 'application/json'
         }
