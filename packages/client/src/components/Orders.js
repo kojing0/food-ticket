@@ -11,8 +11,23 @@ import Button from '@mui/material/Button';
 import { ethers } from "ethers";
 import abi from "../utils/MyToken.json";
 
-const contractAddress = "0xCE98866e0CE4266AF32Ae791cFb139Abb13A7a23"
-const contractABI = abi.abi;
+import { createThirdwebClient, getContract } from "thirdweb";
+import { defineChain } from "thirdweb";
+
+// create the client with your clientId, or secretKey if in a server environment
+const client = createThirdwebClient({ 
+  clientId: "4ad298d7308d3d4854c5d058631197cd"
+ });
+
+// connect to your contract
+const contract = getContract({ 
+  client, 
+  chain: defineChain(6038361), 
+  address: "0xBc7a0c56c8b45550e9CB844b8589E1BaA8dC88A2"
+});
+
+// const contractAddress = "0xBc7a0c56c8b45550e9CB844b8589E1BaA8dC88A2"
+// const contractABI = abi.abi;
 
 function Orders() {
   const [items, setItems] = useState([]);
@@ -27,7 +42,7 @@ function Orders() {
   const fetchData = async () => {
     try {
       // TODO:zkyotoのコントラクトに入れ替える
-      const response = await fetch(`https://zkyoto.explorer.startale.com/api/v2/tokens/0xF1AeBea90d0Fa81151DA1f600Dc541a9D4e17146/instances`, {
+      const response = await fetch(`https://zkyoto.explorer.startale.com/api/v2/tokens/0xBc7a0c56c8b45550e9CB844b8589E1BaA8dC88A2/instances`, {
         headers: {
           'accept': 'application/json'
         }
@@ -63,21 +78,26 @@ function Orders() {
 
   const getOrderNFT = async (index) => {
     try {
-      const { ethereum } = window;
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const orderContract = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        );
-        const orderTxn = await orderContract.safeMint(logingAccount, index);
-        await orderTxn.wait()
-        console.log("Mining...", orderTxn.hash);
-      } else {
-        console.log("Ethereum object doesn't exist!");
-      }
+      // const { ethereum } = window;
+      // if (ethereum) {
+        // const provider = new ethers.providers.Web3Provider(ethereum);
+        // const signer = provider.getSigner();
+        // const orderContract = new ethers.Contract(
+        //   contractAddress,
+        //   contractABI,
+        //   signer
+        // );
+        // const orderTxn = await orderContract.safeMint(logingAccount, index);
+        // await orderTxn.wait()
+        // console.log("Mining...", orderTxn.hash);
+        // console.log("ウォレットアドレス：",client.clientId);
+        const walletAddress = logingAccount;
+        const tokenId = 0;
+        await contract.erc721.transfer(walletAddress, tokenId);
+        console.log("Mining...",contract.contractAddress)
+    //   } else {
+    //     console.log("Ethereum object doesn't exist!");
+    //   }
     } catch (error) {
       console.log(error);
     }
