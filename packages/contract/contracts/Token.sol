@@ -13,7 +13,7 @@ contract MyToken is ERC721, Ownable {
             "https://ipfs.io/ipfs/QmUG9kEFETtHgSEyL99ruq3TL9dci2uAzcHL5paCCsdSXe/";
     }
 
-    function safeMint(address to, uint256 tokenId) public onlyOwner {
+    function safeMint(address to, uint256 tokenId) public {
         _safeMint(to, tokenId);
     }
 }
