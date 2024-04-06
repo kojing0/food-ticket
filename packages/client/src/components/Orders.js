@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,16 +8,26 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-function Orders() {
-  const [items, setItems] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
+import { ethers } from "ethers";
+import abi from "../utils/MyToken.json";
 
-  React.useEffect(() => {
+const contractAddress = "0xF1AeBea90d0Fa81151DA1f600Dc541a9D4e17146"
+const contractABI = abi.abi;
+
+function Orders() {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [logingAccount, setLoginAccount] = useState("");
+
+  useEffect(() => {
     fetchData();
+    checkIfWalletIsConnected();
   }, []);
 
   const fetchData = async () => {
     try {
+      // TODO:zkyotoのコントラクトに入れ替える
+      // const response = await fetch('https://zkyoto.explorer.startale.com/api/v2/tokens/0xF1AeBea90d0Fa81151DA1f600Dc541a9D4e17146/instances', {
       const response = await fetch('https://zkatana.explorer.startale.com/api/v2/tokens/0x81fFb522f3a1D2071A86736156E2E215D5e31ee0/instances', {
         headers: {
           'accept': 'application/json'
@@ -29,6 +39,48 @@ function Orders() {
     } catch (error) {
       console.error('Error fetching data:', error);
       setLoading(false);
+    }
+  };
+
+  const checkIfWalletIsConnected = async () => {
+    try {
+      const { ethereum } = window;
+      if (!ethereum) {
+        console.log("Make sure you have Metamask!")
+      } else {
+        console.log("We have the ethereum object", ethereum)
+      }
+      const accounts = await ethereum.request({ method: 'eth_accounts' })
+      if (accounts.length !== 0) {
+        console.log("Found an authorized account:", accounts[0]);
+        setLoginAccount(accounts[0])
+      } else {
+        console.log("No authorized account found")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const getOrderNFT = async (index) => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const orderContract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+        const orderTxn = await orderContract.safeMint(logingAccount, index);
+        await orderTxn.wait()
+        console.log("Mining...", orderTxn.hash);
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -49,7 +101,7 @@ function Orders() {
               <TableCell colSpan={3} align="center">Loading...</TableCell>
             </TableRow>
           ) : (
-            items.map((item) => (
+            items.map((item, index) => (
               <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
                   <img src={item.image_url} alt='main image description' width={70} />
@@ -57,7 +109,7 @@ function Orders() {
                 <TableCell align="right">{item.metadata.name}</TableCell>
                 <TableCell align="right">{item.metadata.description}</TableCell>
                 <TableCell align="right">
-                  <Button onClick={() => {}}>
+                  <Button onClick={() => { getOrderNFT(index) }}>
                     購入
                   </Button>
                 </TableCell>

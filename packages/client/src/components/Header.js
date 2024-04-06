@@ -23,7 +23,6 @@ function Header(props) {
       });
       console.log("connected: ", accounts[0])
       setCurrentAccount(accounts[0])
-      // getTweet();
     } catch (error) {
       console.log(error);
     }
