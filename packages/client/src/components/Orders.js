@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import { ethers } from "ethers";
 import abi from "../utils/MyToken.json";
 
-const contractAddress = "0xBD235f4136E2AC057f64A474aF036cB2549f258d"
+const contractAddress = "0xCE98866e0CE4266AF32Ae791cFb139Abb13A7a23"
 const contractABI = abi.abi;
 
 function Orders() {
@@ -27,7 +27,7 @@ function Orders() {
   const fetchData = async () => {
     try {
       // TODO:zkyotoのコントラクトに入れ替える
-      const response = await fetch(`https://zkyoto.explorer.startale.com/api/v2/tokens/${contractAddress}/instances`, {
+      const response = await fetch(`https://zkyoto.explorer.startale.com/api/v2/tokens/0xF1AeBea90d0Fa81151DA1f600Dc541a9D4e17146/instances`, {
         headers: {
           'accept': 'application/json'
         }
