@@ -3,30 +3,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+import {
+  ConnectWallet,
+} from "@thirdweb-dev/react";
+
 function Header(props) {
   const { title } = props;
 
   // ログインしたユーザ名を保存
   const [currentAccount, setCurrentAccount] = useState("");
-
-  const connectWallet = async () => {
-    try {
-      // ユーザーが認証可能なウォレットアドレスを持っているか確認
-      const { ethereum } = window;
-      if (!ethereum) {
-        alert("Get MetaMask");
-        return;
-      }
-      // 持っている場合は、ユーザーに対してウォレットへのアクセス許可を求める。許可されれば、ユーザーの最初のウォレットアドレスを currentAccount に格納する。
-      const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      console.log("connected: ", accounts[0])
-      setCurrentAccount(accounts[0])
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   // ウォレットに接続しているか確認
   const checkIfWalletIsConnected = async () => {
@@ -68,9 +53,10 @@ function Header(props) {
         </Typography>
 
         {!currentAccount && (
-          <Button size="large" onClick={connectWallet}>
-            ウォレット接続
-          </Button>
+          <ConnectWallet
+            theme={"dark"}
+            modalSize={"wide"}
+          />
         )}
         {currentAccount && (
           <Button size="large" >

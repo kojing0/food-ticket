@@ -9,20 +9,36 @@ import Orders from '../components/Orders';
 
 import Container from '@mui/material/Container';
 
+import {
+  ThirdwebProvider,
+  metamaskWallet,
+  ja,
+} from "@thirdweb-dev/react";
+
 export default function Home() {
   return (
     <>
-      <Box mt={2}>
-        <Header title="サンプル中華料理店" />
-      </Box>
-      <Box mt={2}>
-        <Images />
-      </Box>
-      <Box mt={4}>
-        <Container maxWidth="lg">
-          <Orders />
-        </Container>
-      </Box>
+      <ThirdwebProvider
+        // activeChain="sepolia"
+        // clientId="YOUR_CLIENT_ID"
+        locale={ja()}
+        supportedWallets={[
+          metamaskWallet(),
+        ]}
+      >
+
+        <Box mt={2}>
+          <Header title="サンプル中華料理店" />
+        </Box>
+        <Box mt={2}>
+          <Images />
+        </Box>
+        <Box mt={4}>
+          <Container maxWidth="lg">
+            <Orders />
+          </Container>
+        </Box>
+      </ThirdwebProvider>
     </>
   );
 }
