@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import { ThirdwebNftMedia, useContract, useContractMetadata, useNFTs } from "@thirdweb-dev/react";
 // チェックインアイコンのパス
 
 const checkInIcon = '/images/checkin.png';
@@ -21,6 +22,8 @@ const MyNftPage = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [logingAccount, setLoginAccount] = useState("");
+  const { contract } = useContract("0xBc7a0c56c8b45550e9CB844b8589E1BaA8dC88A2");
+  const { data: nfts, isLoading, error } = useNFTs(contract, { start: 0, count: 100 });
 
   useEffect(() => {
     fetchData();
