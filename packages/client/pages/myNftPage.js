@@ -76,21 +76,21 @@ const MyNftPage = () => {
   };
 
   // ダミーデータの準備
-  const products = [
-    { id: 1, name: 'サンドイッチ', price: '500円', tickets: '残り10枚', image: '/images/sandwich.jpeg' },
-    { id: 2, name: 'ミートソース', price: '700円', tickets: '残り5枚', image: '/images/meetsouce.jpeg' },
-    { id: 3, name: 'ハンバーグ', price: '900円', tickets: '残り8枚', image: '/images/hamburg.jpeg' },
-    { id: 4, name: 'カフェラテ', price: '300円', tickets: '残り15枚', image: 'images/cafelatte.jpeg' },
-    { id: 5, name: '紅茶', price: '200円', tickets: '残り20枚', image: 'images/tea.jpeg' }
-  ];
+  // const products = [
+  //   { id: 1, name: 'サンドイッチ', price: '500円', tickets: '残り10枚', image: '/images/sandwich.jpeg' },
+  //   { id: 2, name: 'ミートソース', price: '700円', tickets: '残り5枚', image: '/images/meetsouce.jpeg' },
+  //   { id: 3, name: 'ハンバーグ', price: '900円', tickets: '残り8枚', image: '/images/hamburg.jpeg' },
+  //   { id: 4, name: 'カフェラテ', price: '300円', tickets: '残り15枚', image: 'images/cafelatte.jpeg' },
+  //   { id: 5, name: '紅茶', price: '200円', tickets: '残り20枚', image: 'images/tea.jpeg' }
+  // ];
 
   return (
     <Layout>
       <div className="nft-page">
         {/* ここにページ固有の内容 */}
-        <header className="header-nav">
+        {/* <header className="header-nav">
           <h1>商品カード画面</h1>
-        </header>
+        </header> */}
 
         <div className="nft-list-container">
           <ul className="nft-list">
