@@ -14,15 +14,15 @@ return (
     <>
     
       <Box mt={2}>
-        <Header title="サンプル中華料理店" />
+        <Header title="コメダ珈琲店" />
       </Box>
-      <Box mt={2}>
+      <Box mt={2} style={{ paddingTop: '64px', paddingBottom: '0' }}>
         <Images />
       </Box>
-      <Box mt={4}>
+      <Box mt={2} style={{ paddingTop: '0' }}>
         <Container maxWidth="lg">
-        <MyNftPage/>
-          {/* <Orders /> */}
+            <Orders />
+            <MyNftPage />
         </Container>
       </Box>
     </>

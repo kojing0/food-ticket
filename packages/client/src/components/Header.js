@@ -56,7 +56,7 @@ function Header(props) {
   useEffect(() => { checkIfWalletIsConnected(); }, []);
   return (
     <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed', top: 0, width: '100%', zIndex: 1,backgroundColor: 'white', color: 'black' }}>
         <Typography
           variant="h5"
           color="inherit"

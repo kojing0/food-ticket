@@ -17,7 +17,7 @@ function Images() {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            backgroundImage: `url(https://source.unsplash.com/random?wallpapers)`,
+            backgroundImage: `url(/images/S__44638214_0.jpg)`, // ここを変更
           }}
         >
           {/* Increase the priority of the hero background image */}
