@@ -51,8 +51,11 @@ function Header(props) {
         >
           {title}
         </Typography>
-
-        {!currentAccount && (
+        <ConnectWallet
+            theme={"dark"}
+            modalSize={"wide"}
+          />
+        {/* {!currentAccount && (
           <ConnectWallet
             theme={"dark"}
             modalSize={"wide"}
@@ -62,7 +65,7 @@ function Header(props) {
           <Typography >
             ウォレット接続済み
           </Typography>
-        )}
+        )} */}
 
       </Toolbar>
     </React.Fragment>
