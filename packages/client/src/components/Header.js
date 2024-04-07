@@ -41,7 +41,7 @@ function Header(props) {
   useEffect(() => { checkIfWalletIsConnected(); }, []);
   return (
     <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed', top: 0, width: '100%', zIndex: 1,backgroundColor: 'white', color: 'black' }}>
+      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider', position: 'fixed', top: 0, width: '100%', zIndex: 1, backgroundColor: 'white', color: 'black' }}>
         <Typography
           variant="h5"
           color="inherit"
@@ -59,9 +59,9 @@ function Header(props) {
           />
         )}
         {currentAccount && (
-          <Button size="large" >
+          <Typography >
             ウォレット接続済み
-          </Button>
+          </Typography>
         )}
 
       </Toolbar>
