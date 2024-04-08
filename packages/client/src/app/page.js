@@ -8,18 +8,14 @@ import Images from '../components/Images';
 import Orders from '../components/Orders';
 import MyNftPage from "../../pages/myNftPage";
 import Container from '@mui/material/Container';
-
+import { createThirdwebClient, getContract, resolveMethod } from "thirdweb";
+import { defineChain } from "thirdweb";
 import {
+  ChainId,
   ThirdwebProvider,
   metamaskWallet,
   ja,
 } from "@thirdweb-dev/react";
-
-
-
-
-import { createThirdwebClient, getContract, resolveMethod } from "thirdweb";
-import { defineChain } from "thirdweb";
 
 // create the client with your clientId, or secretKey if in a server environment
 export const client = createThirdwebClient({ 
@@ -34,8 +30,9 @@ export const contract = getContract({
 });
 
 export default function Home() {
-  
+
   return (
+    <>
     <ThirdwebProvider >
       <Box mt={2}>
         <Header title="コメダ珈琲店" />
@@ -50,6 +47,7 @@ export default function Home() {
         </Container>
       </Box>
     </ThirdwebProvider>
+    </>
   );
 }
 
