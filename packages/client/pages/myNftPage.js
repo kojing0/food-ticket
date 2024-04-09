@@ -3,7 +3,7 @@ import './MyNftPage.css'; // スタイリング用のCSSファイル
 import Layout from '../src/components/Layout';
 import '../styles/Common.css'; // このページ用にインポート
 
-import { ThirdwebNftMedia, useContract, useContractMetadata, useNFTs } from "@thirdweb-dev/react";
+import { useContract, useNFTs } from "@thirdweb-dev/react";
 // チェックインアイコンのパス
 
 const checkInIcon = '/images/checkin.png';
@@ -11,11 +11,8 @@ const checkInIcon = '/images/checkin.png';
 
 const MyNftPage = () => {
   const [logingAccount, setLoginAccount] = useState("");
-
   const { contract } = useContract("0xED5AF388653567Af2F388E6224dC7C4b3241C544");
   const { data: nfts, isLoading, error } = useNFTs(contract);
-
-
   useEffect(() => {
     checkIfWalletIsConnected();
   }, []);
@@ -50,7 +47,6 @@ const MyNftPage = () => {
       console.log(error);
     }
   };
-
 
   if (isLoading) {
     return <p>Loading...</p>;

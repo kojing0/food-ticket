@@ -11,20 +11,18 @@ import Button from '@mui/material/Button';
 import { ethers } from "ethers";
 import abi from "../utils/MyToken.json";
 
-import { createThirdwebClient, getContract } from "thirdweb";
-import { defineChain } from "thirdweb";
 
 // create the client with your clientId, or secretKey if in a server environment
-const client = createThirdwebClient({ 
-  clientId: "4ad298d7308d3d4854c5d058631197cd"
- });
+// const client = createThirdwebClient({ 
+//   clientId: "3723bb4ee729f5524ca67005a82dda42"
+//  });
 
 // connect to your contract
-const contract = getContract({ 
-  client, 
-  chain: defineChain(6038361), 
-  address: "0xBc7a0c56c8b45550e9CB844b8589E1BaA8dC88A2"
-});
+// const contract = getContract({ 
+//   client, 
+//   chain: defineChain(6038361), 
+//   address: "0xBc7a0c56c8b45550e9CB844b8589E1BaA8dC88A2"
+// });
 
 // const contractAddress = "0xBc7a0c56c8b45550e9CB844b8589E1BaA8dC88A2"
 // const contractABI = abi.abi;
@@ -33,6 +31,8 @@ function Orders() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [logingAccount, setLoginAccount] = useState("");
+
+
 
   useEffect(() => {
     fetchData();
