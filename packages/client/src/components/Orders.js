@@ -104,35 +104,54 @@ function Orders() {
   };
 
   return (
-    <TableContainer component={Paper} sx={{ height: 280 }}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>商品画像</TableCell>
-            <TableCell align="right">商品名</TableCell>
-            <TableCell align="right">商品詳細</TableCell>
-            <TableCell align="right"></TableCell>
-          </TableRow>
-        </TableHead>
+    <TableContainer component={Paper}>
+      <Table aria-label="simple table" sx={{ borderCollapse: "collapse" }}>
         <TableBody>
           {loading ? (
             <TableRow>
-              <TableCell colSpan={3} align="center">Loading...</TableCell>
+              <TableCell colSpan={2} align="center">Loading...</TableCell>
             </TableRow>
           ) : (
             items.map((item, index) => (
-              <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row">
-                  <img src={item.image_url} alt='main image description' width={70} />
-                </TableCell>
-                <TableCell align="right">{item.metadata.name}</TableCell>
-                <TableCell align="right">{item.metadata.description}</TableCell>
-                <TableCell align="right">
-                  <Button onClick={() => { getOrderNFT(index) }}>
-                    購入
-                  </Button>
-                </TableCell>
-              </TableRow>
+              <React.Fragment key={item.id}>
+                {/* ヘッダー */}
+                <TableRow sx={{ height: 'auto', padding: '5px 0' }}>
+                  <TableCell colSpan={2} sx={{ fontSize: "1.1rem", fontWeight: 'bold', borderBottom: "none", paddingBottom: 1, whiteSpace: 'nowrap' }}>
+                    {item.metadata.name}
+                  </TableCell>
+                </TableRow>
+
+                {/* ボディ */}
+                <TableRow sx={{ height: "100px", verticalAlign: 'top', padding: '5px 0' }}>
+                  <TableCell component="th" scope="row" sx={{ width: '50%', borderBottom: "none", paddingTop: 0, paddingBottom: 0, paddingLeft: 1, paddingRight: 1 }}>
+                    <img
+                      src={item.image_url}
+                      alt='main image description'
+                      style={{ width: 'calc(100% - 10px)', height: 'auto', marginLeft: '5px' }}
+                    />
+                  </TableCell>
+                  <TableCell sx={{ fontSize: "0.8rem", borderBottom: "none", paddingTop: 0, paddingBottom: 0, paddingRight: 2, paddingLeft: 1 }}>
+                    {item.metadata.description}
+                  </TableCell>
+                </TableRow>
+
+                {/* フッター */}
+                <TableRow sx={{ height: 'auto', padding: '5px 0' }}>
+                  <TableCell sx={{ fontSize: "0.8rem", verticalAlign: 'top', borderBottom: "none", paddingTop: 0, paddingLeft: 1 }}>
+                    価格: 600円
+                  </TableCell>
+                  <TableCell sx={{ verticalAlign: 'top', textAlign: 'right', borderBottom: "none", paddingTop: 0, paddingRight: 1 }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => { getOrderNFT(index) }}
+                      sx={{ marginTop: '5px', marginRight: '5px' }}
+                    >
+                      購入
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
             ))
           )}
         </TableBody>
